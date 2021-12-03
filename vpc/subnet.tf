@@ -6,7 +6,18 @@ resource "aws_subnet" "private-subnet" {
   availability_zone = element(var.AZS,count.index)
 
   tags = {
-    Name = "subnet-${var.ENV}-${count.index}"
+    Name = "private-subnet-${var.ENV}-${count.index}"
+  }
+}
+
+resource "aws_subnet" "public-subnet" {
+  count = length(var.PUBLIC_SUBNETS)
+  vpc_id = aws_vpc.main.id
+  cidr_block = element(var.PUBLIC_SUBNETS,count.index)
+  availability_zone = element(var.AZS,count.index)
+
+  tags = {
+    Name = "public-subnet-${var.ENV}-${count.index}"
   }
 }
 
@@ -14,4 +25,10 @@ resource "aws_route_table_association" "private-subnet" {
   count          = length(aws_subnet.private-subnet.*.id)
   subnet_id      = element(aws_subnet.private-subnet.*.id,count.index)
   route_table_id = aws_route_table.private-route.id
+}
+
+resource "aws_route_table_association" "public-subnet" {
+  count           = length(aws_subnet.public-subnet.*.id)
+  subnet_id       = element(aws_subnet.public-subnet.*.id,count.index)
+  route_table_id  = aws_route_table.private-route.id
 }

@@ -11,6 +11,7 @@ resource "aws_subnet" "private-subnet" {
 }
 
 resource "aws_subnet" "public-subnet" {
+  depends_on = [aws_vpc_ipv4_cidr_block_association.addon]
   count = length(var.PUBLIC_SUBNETS)
   vpc_id = aws_vpc.main.id
   cidr_block = element(var.PUBLIC_SUBNETS,count.index)

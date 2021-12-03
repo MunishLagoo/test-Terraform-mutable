@@ -9,3 +9,8 @@ resource "aws_subnet" "subnet" {
     Name = "subnet-${var.ENV}-${count.index}"
   }
 }
+
+resource "aws_route_table_association" "subnet" {
+  subnet_id      = aws_subnet.subnet.id
+  route_table_id = aws_route_table.private-route.id
+}

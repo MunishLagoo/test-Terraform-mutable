@@ -42,7 +42,7 @@ resource "aws_route_table" "public-route" {
     
      } ]
     
-    tag {
+    tags = {
         Name="public-route"
     }
 }

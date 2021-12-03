@@ -23,8 +23,17 @@ resource "aws_route_table" "private-route" {
   }
 }
 
+resource "aws_route_table" "sample" {
+vpc_id = var.VPC_ID_DEFAULT
+route = []
+tags = {
+    Name     = "sample"
+  }
+}
+
+
 resource "aws_route" "route_from_default_vpc" {
-    count                   = length(local.association-list)
+  count                     = length(local.association-list)
   route_table_id            = tomap(element(local.association-list,count.index))["route_table"]
   destination_cidr_block    = tomap(element(local.association-list,count.index))["cidr"]
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id

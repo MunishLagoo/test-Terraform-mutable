@@ -2,7 +2,7 @@ resource "aws_route_table" "private-route" {
   vpc_id = aws_vpc.main.id
 
   route = [ {
-    cidr_block                      = var.VPC_ID_DEFAULT
+    cidr_block                      = var.VPC_CIDR_DEFAULT
     vpc_peering_connection_id       = aws_vpc_peering_connection.peer.id
     "carrier_gateway_id"            = ""
     "destination_prefix_list_id"    = ""

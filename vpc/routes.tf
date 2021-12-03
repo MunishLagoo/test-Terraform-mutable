@@ -4,8 +4,7 @@ resource "aws_route_table" "private-route" {
   route  {
     cidr_block                      = var.VPC_CIDR_DEFAULT
     vpc_peering_connection_id       = aws_vpc_peering_connection.peer.id
-    
-  }]
+  }
 
   tags = {
     Name                            = "private-route"

@@ -93,7 +93,7 @@ resource "aws_route53_record" "mysql" {
 //Load Schema to DB
 
 resource "null_resource" "mysql" {
-provisoner  "local-exec" {
+provisioner  "local-exec" {
 command = <<EOF
 sudo yum install mariadb -y
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"

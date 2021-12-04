@@ -23,10 +23,10 @@ locals{
 
 
 //*******outputs of these local variables
-output "sample" {
-    value = local.association-list
-}
+//output "sample" {
+//    value = local.association-list
+//}
 
-output "ALL_VPC_CIDR" {
-    value = [for s in local.ALL_VPC_CIDR:"CIDR = ${s}"]
-}
+//output "ALL_VPC_CIDR" {
+//    value = [for s in local.ALL_VPC_CIDR:"CIDR = ${s}"]
+//}

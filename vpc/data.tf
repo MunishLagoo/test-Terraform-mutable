@@ -3,6 +3,6 @@ data "aws_route_tables" "default-vpc-routes" {
 }
 
 //******output of data
-output "default-vpc-routes" {
-    value = data.aws_route_tables.default-vpc-routes
-}
+//output "default-vpc-routes" {
+//    value = data.aws_route_tables.default-vpc-routes
+//}

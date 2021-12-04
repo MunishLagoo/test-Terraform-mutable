@@ -13,7 +13,7 @@ resource "aws_db_instance" "mysql" {
   name                   = "dummy"
   username               = local.rds_mysqlUser
   password               = local.rds_mysqlPass
-  parameter_group_name   = "default.mysql5.7"
+  parameter_group_name   = aws_db_parameter_group.pg.name
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.mysql.id]
   db_subnet_group_name   = aws_db_subnet_group.subnet-gp.name

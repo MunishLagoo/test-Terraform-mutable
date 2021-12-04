@@ -2,7 +2,7 @@ output "VPC_ID_DEFAULT" {
 value = var.VPC_ID_DEFAULT
 }
 output "VPC_ID" {
-value = aws_vpc.main
+value = aws_vpc.main.id
 } 
 output "PRIVATE_SUBNETS_IDS" {
 value= aws_subnet.private-subnet.*.id

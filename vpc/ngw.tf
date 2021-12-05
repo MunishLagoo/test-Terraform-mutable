@@ -2,7 +2,6 @@
 //allocation_id
 resource "aws_eip" "ngw" {
   vpc      = true
-
   tags = {
       Name = "${var.ENV}-ngw-ip"
   }

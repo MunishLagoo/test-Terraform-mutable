@@ -31,5 +31,5 @@ resource "aws_route_table_association" "private-subnet" {
 resource "aws_route_table_association" "public-subnet" {
   count           = length(aws_subnet.public-subnet.*.id)
   subnet_id       = element(aws_subnet.public-subnet.*.id,count.index)
-  route_table_id  = aws_route_table.private-route.id
+  route_table_id  = aws_route_table.public-route.id
 }

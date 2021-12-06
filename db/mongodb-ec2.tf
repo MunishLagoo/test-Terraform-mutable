@@ -2,7 +2,7 @@
 //request spot instance
 //wait for fulfilment option because it is spot instance
 resource "aws_spot_instance_request" "mongodb" {
-  ami           = data.aws_ami.ami
+  ami           = data.aws_ami.ami.id
   instance_type = var.MONGODB_INSTANCE
   vpc_security_group_ids = [aws_security_group.mongodb.id]
   wait_for_fulfillment = true

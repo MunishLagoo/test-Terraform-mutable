@@ -89,9 +89,9 @@ resource "null_resource" "mongodb" {
             password = local.ssh_pass
         }
         inline = [
-        "yum install python3-pip -y",
-        "pip3 install pip --upgrade",
-        "pip3 install ansible",
+        "sudo yum install python3-pip -y",
+        "sudo pip3 install pip --upgrade",
+        "sudo pip3 install ansible",
         "ansible-pull -U https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/ansible roboshop-pull.yml -e ENV=${var.ENV} -e COMPONENT=mongodb -e APP_VERSION="
         ]
     }

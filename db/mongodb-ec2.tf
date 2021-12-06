@@ -99,7 +99,7 @@ resource "aws_route53_record" "mongodb" {
 
 //use base image already ansible installed
 resource "null_resource" "mongodb" {
-    provisioner {
+    provisioner "remote-exec" {
         connection {
             host = aws_spot_instance_request.mongodb.private_ip
             user = local.ssh_user

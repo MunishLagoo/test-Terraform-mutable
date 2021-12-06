@@ -16,9 +16,15 @@ data "aws_secretsmanager_secret_version" "secrets-version" {
 }
 
 
+# data "aws_ami" "ami" {
+#   most_recent      = true
+#   name_regex       = "Centos-7-DevOps-Practice"
+#   owners           = ["973714476881"]
+# }
+
 data "aws_ami" "ami" {
-  most_recent      = true
-  name_regex       = "Centos-7-DevOps-Practice"
-  owners           = ["973714476881"]
+  most_recent = true
+  name_regex = "base"
+  owners = ["self"]
 }
  

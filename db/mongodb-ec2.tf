@@ -81,18 +81,32 @@ resource "aws_route53_record" "mongodb" {
 
 //install mongodb
 //install ansible on mongodb node
+# resource "null_resource" "mongodb" {
+#     provisioner "remote-exec" {
+#         connection {
+#             host = aws_spot_instance_request.mongodb.private_ip
+#             user = local.ssh_user
+#             password = local.ssh_pass
+#         }
+#         inline = [
+#         "sudo yum install python3-pip -y",
+#         "sudo pip3 install pip --upgrade",
+#         "sudo pip3 install ansible",
+#         "ansible-pull -U https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/ansible roboshop-pull.yml -e ENV=${var.ENV} -e COMPONENT=mongodb -e APP_VERSION="
+#         ]
+#     }
+# }
+
+//use base image already ansible installed
 resource "null_resource" "mongodb" {
-    provisioner "remote-exec" {
+    provisioner {
         connection {
             host = aws_spot_instance_request.mongodb.private_ip
             user = local.ssh_user
             password = local.ssh_pass
         }
         inline = [
-        "sudo yum install python3-pip -y",
-        "sudo pip3 install pip --upgrade",
-        "sudo pip3 install ansible",
-        "ansible-pull -U https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/ansible roboshop-pull.yml -e ENV=${var.ENV} -e COMPONENT=mongodb -e APP_VERSION="
+            "ansible-pull -U https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/ansible roboshop-pull.yml -e ENV=${var.ENV} -e COMPONENT=mongodb -e APP_VERSION="
         ]
     }
 }

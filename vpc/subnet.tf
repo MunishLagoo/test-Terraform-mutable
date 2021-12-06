@@ -32,8 +32,4 @@ resource "aws_route_table_association" "public-subnet" {
   count           = length(aws_subnet.public-subnet.*.id)
   subnet_id       = element(aws_subnet.public-subnet.*.id,count.index)
   route_table_id  = aws_route_table.public-route.id
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8ec26cd270f669793154d03007d334dcce5916c9

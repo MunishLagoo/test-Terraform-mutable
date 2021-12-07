@@ -43,7 +43,7 @@ resource "aws_security_group" "rabbitmq" {
       self             = false
     }
   ]
-  tags {
+  tags = {
       Name = "rabbitmq-${var.ENV}"
   }
 }

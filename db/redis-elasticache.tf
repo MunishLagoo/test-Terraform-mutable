@@ -57,7 +57,7 @@ resource "aws_elasticache_parameter_group" "redis" {
 }
 
 resource "aws_route53_record" "redis" {
-  zone_id = data.terraform_remote_state.vpc.outputs.INTERNAL_HOSTEDZONE_ID
+  zone_id = data.terraform_remote_state.vpc.outputs.INTERNAL_HOSTED_ZONEID
   name    = "redis-${var.ENV}"
   type    = "CNAME"
   ttl     = "300"

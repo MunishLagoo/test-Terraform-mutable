@@ -40,7 +40,7 @@ resource "aws_security_group" "redis" {
       self             = false
     }
   ]
-  tags {
+  tags = {
       Name = "redis-${var.ENV}"
   }
 }

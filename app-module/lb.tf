@@ -23,7 +23,7 @@ port             = var.PORT
 
 resource "aws_lb_listener_rule" "private" {
 count = var.IS_PRIVATE_LB ? 1 : 0
-listner_arn = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
+listener_arn = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
 priority = var.LB_RULE_PRIORITY
 action {
 type = "forward"
@@ -36,7 +36,7 @@ condition {
  }
 }
 
-//public listner for frontend
+//public listener for frontend
 resource "aws_lb_listener" "public_listener" {
   load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
   port              = "80"

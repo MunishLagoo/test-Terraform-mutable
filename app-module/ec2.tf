@@ -14,7 +14,7 @@ resource "aws_instance" "od" {
     instance_type = var.INSTANCE_TYPE
     subnet_id = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS_IDS,count.index)
     vpc_security_group_ids = [aws_security_group.sg.id]
-    tags = { Name = local.tags["Name"]}
+    
 }
 
 outputs "INSTANCE_IDS" {

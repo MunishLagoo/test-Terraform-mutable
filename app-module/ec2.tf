@@ -19,6 +19,13 @@ resource "aws_instance" "od" {
     
 }
 
+resource "aws_ec2_tag" "ec2-name-tag" {
+  count       = length(local.INSTANCE_IDS)
+  resource_id = element(local.INSTANCE_IDS, count.index)
+  key         = "Name"
+  value       = local.tags["Name"]
+}
+
 output "INSTANCE_IDS" {
     value = local.INSTANCE_IDS
 }

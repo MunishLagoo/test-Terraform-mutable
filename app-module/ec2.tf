@@ -17,6 +17,6 @@ resource "aws_instance" "od" {
     
 }
 
-outputs "INSTANCE_IDS" {
+output "INSTANCE_IDS" {
     value = local.INSTANCE_IDS
 }

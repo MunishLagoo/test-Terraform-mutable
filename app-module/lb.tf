@@ -31,7 +31,7 @@ target_group_arn = aws_lb_target_group.tg.arn
  }
 condition {
     host_header {
-        values ["${var.COMPONENT}-${var.ENV}.roboshop.internal"]
+        values = ["${var.COMPONENT}-${var.ENV}.roboshop.internal"]
     }
  }
 }

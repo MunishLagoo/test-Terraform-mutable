@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'WORKSTATION'}
     environment {
-        ACTION = "destroy"
+        ACTION = "apply"
         ENV = "dev"
         SSH = credentials('CENTOS_SSH')
     }
@@ -17,9 +17,9 @@ pipeline {
     }
     stages {
         stage ('VPC') {
-            when {    
-                beforeInput true
-                branch 'production' }
+            // when {    
+            //     beforeInput true
+            //     branch 'production' }
               
             steps {
                 sh '''
@@ -31,7 +31,10 @@ pipeline {
         stage ('DB & ALB') {
             parallel {
                 stage('DB') {
-                
+                // when {
+                //     beforeInput true
+                //     branch 'production'
+                // }
                     input {
                         message "should we continue?"
                         ok "Yes, we should"

@@ -7,7 +7,7 @@ pipeline {
     }
     parameters {
         choice(name:'ENV', choices: ['dev','prod'])
-        string(name: 'ACTION', defaultvalue:'apply',
+        string(name: 'ACTION', defaultValue:'apply',
         description: 'Give an action to do on terraform')
     }
     options {

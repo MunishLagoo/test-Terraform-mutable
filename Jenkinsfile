@@ -3,7 +3,7 @@ pipeline {
     environment {
         ACTION = "apply"
         ENV = "dev"
-        SSH = credentials('centos_ssh')
+        SSH = credentials('CENTOS_SSH')
     }
     parameters {
         choice(name:'ENV', choices: ['dev','prod'])

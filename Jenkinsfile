@@ -7,9 +7,9 @@ pipeline {
     }
     parameters {
         choice(name:'ENV', choices: ['dev','prod'])
-        //string(name: 'ACTION', defaultValue:'apply',
-        //description: 'Give an action to do on terraform')
-        choice(name: 'ACTION', choices: ['apply','destroy'])
+        string(name: 'ACTION', defaultValue:'apply',
+        description: 'Give an action to do on terraform')
+        //choice(name: 'ACTION', choices: ['apply','destroy'])
     }
     options {
         ansiColor('xterm')

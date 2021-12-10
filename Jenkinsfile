@@ -30,7 +30,7 @@ pipeline {
             parallel {
                 stage('DB') {
                     when {
-                        before Input true
+                        beforeInput true
                     }
                     input {
                         message "should we continue?"

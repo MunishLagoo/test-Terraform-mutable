@@ -16,11 +16,42 @@ pipeline {
     }
     stages {
         stage ('VPC') {
+            when {
+                branch 'production'
+            }
             steps {
                 sh '''
                 cd vpc
-                make dev-${ACTION}
+                make ${ENV}-${ACTION}
                 '''
+            }
+        }
+        stage ('DB & ALB') {
+            parallel {
+                stage('DB') {
+                    when {
+                        before Input true
+                    }
+                    input {
+                        message "should we continue?"
+                        ok "Yes, we should"
+                        submitter "admin"
+                    }
+                    steps {
+                        sh '''
+                        cd db
+                        make ${ENV}-${ACTION}
+                        '''
+                    }
+                }
+                stage('ALB') {
+                    steps {
+                        sh '''
+                        cd alb
+                        make ${ENV}-${ACTION}
+                        '''
+                    }
+                }
             }
         }
     }

@@ -31,7 +31,7 @@ pipeline {
                 stage('DB') {
                     when {
                         beforeInput true
-                        
+                        branch 'production'
                     }
                     input {
                         message "should we continue?"

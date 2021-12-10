@@ -29,7 +29,10 @@ pipeline {
         stage ('DB & ALB') {
             parallel {
                 stage('DB') {
-                    
+                    when {
+                        beforeInput true
+                        
+                    }
                     input {
                         message "should we continue?"
                         ok "Yes, we should"

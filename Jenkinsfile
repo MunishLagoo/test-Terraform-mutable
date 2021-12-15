@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'WORKSTATION'}
     environment {
-        ACTION = "apply"
+        ACTION = "destroy"
         ENV = "dev"
         SSH = credentials('CENTOS_SSH')
     }

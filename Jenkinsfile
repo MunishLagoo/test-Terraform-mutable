@@ -67,10 +67,7 @@ pipeline {
             }
        }
 
-    }
-
-    stages {
-        
+            
         stage ('DB & ALB') {
             when {
                 expression {
@@ -113,7 +110,7 @@ pipeline {
                 '''
             }
         }
-
-    }
-    
+//Stages
+ } 
+//Pipeline 
 }

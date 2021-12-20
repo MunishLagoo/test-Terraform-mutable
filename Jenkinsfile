@@ -1,15 +1,15 @@
 pipeline {
     agent {label 'WORKSTATION'}
     environment {
-        ACTION = "destroy"
-        ENV = "dev"
+        //ACTION = "apply"
+        //ENV = "dev"
         SSH = credentials('CENTOS_SSH')
     }
     parameters {
         choice(name:'ENV', choices: ['dev','prod'])
-        string(name: 'ACTION', defaultValue:'apply',
-        description: 'Give an action to do on terraform')
-        //choice(name: 'ACTION', choices: ['apply','destroy'])
+        //string(name: 'ACTION', defaultValue:'apply',
+        //description: 'Give an action to do on terraform')
+        choice(name: 'ACTION', choices: ['apply','destroy'])
     }
     options {
         ansiColor('xterm')
@@ -28,13 +28,14 @@ pipeline {
                 '''
             }
         }
-        stage ('DB & ALB') {
-            parallel {
+        //stage ('DB & ALB') {
+          //  parallel {
                 stage('DB') {
-                // when {
-                //     beforeInput true
-                //     branch 'production'
-                // }
+                //  when {
+                // //     beforeInput true
+                // //     branch 'production'
+                // ${ACTION} == 'apply'
+                //  }
                     // input {
                     //     message "should we continue?"
                     //     ok "Yes, we should"
@@ -48,6 +49,9 @@ pipeline {
                     }
                 }
                 stage('ALB') {
+                    // when {
+                    //   ${ACTION} == 'apply'
+                    // }
                     steps {
                         sh '''
                         cd alb
@@ -55,7 +59,9 @@ pipeline {
                         '''
                     }
                 }
-            }
-        }
+           // }
+        //}
+
+
     }
 }

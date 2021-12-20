@@ -16,10 +16,14 @@ pipeline {
       //  disableConcurrentBuilds()
     }
     stages {
-        stage ('VPC') {
-            //   when {    
-            //  //     beforeInput true
-            //       branch 'production' }
+        stage ('VPC-Create') {
+            when {    
+            //     beforeInput true
+            //       branch 'production' 
+              expression {
+                  return ${ACTION} =  'apply';
+              }
+            }
               
             steps {
                 sh '''
@@ -28,19 +32,23 @@ pipeline {
                 '''
             }
         }
-        //stage ('DB & ALB') {
-          //  parallel {
-                stage('DB') {
+        stage ('DB & ALB') {
+            when {
+                expression {
+                  return ${ACTION} =  'apply';
+              }
+            } 
+            parallel {
+                stage('DB-Create') {
                 //  when {
-                // //     beforeInput true
-                // //     branch 'production'
-                // ${ACTION} == 'apply'
+                //    beforeInput true
+                //    branch 'production'
                 //  }
-                    // input {
-                    //     message "should we continue?"
-                    //     ok "Yes, we should"
-                    //     submitter "admin"
-                    // }
+                // input {
+                //     message "should we continue?"
+                //     ok "Yes, we should"
+                //     submitter "admin"
+                // }
                     steps {
                         sh '''
                         cd db
@@ -48,19 +56,63 @@ pipeline {
                         '''
                     }
                 }
-                stage('ALB') {
-                    // when {
-                    //   ${ACTION} == 'apply'
-                    // }
-                    steps {
+                stage('ALB-Create') {
+                   steps {
                         sh '''
                         cd alb
                         make ${ENV}-${ACTION}
                         '''
                     }
                 }
-           // }
-       // }
+            }
+       }
+
+    }
+
+    stages {
+        
+        stage ('DB & ALB') {
+            when {
+                expression {
+                  return ${ACTION} =  'destroy';
+              }
+            } 
+            parallel {
+                stage('DB-Destroy') {
+                  steps {
+                        sh '''
+                        cd db
+                        make ${ENV}-${ACTION}
+                        '''
+                    }
+                }
+                stage('ALB-Destroy') {
+                   steps {
+                        sh '''
+                        cd alb
+                        make ${ENV}-${ACTION}
+                        '''
+                    }
+                }
+            }
+       }
+
+       stage ('VPC-Destroy') {
+            when {    
+            //     beforeInput true
+            //       branch 'production' 
+            expression {
+                  return ${ACTION} =  'destroy';
+              }
+            }
+              
+            steps {
+                sh '''
+                cd vpc
+                make ${ENV}-${ACTION}
+                '''
+            }
+        }
 
     }
     

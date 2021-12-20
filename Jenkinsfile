@@ -97,10 +97,10 @@ pipeline {
        stage ('VPC-Destroy') {
             when {    
             //     beforeInput true
-            //       branch 'production' 
-            expression {
-                  return ACTION ==~  'destroy';
-              }
+                   branch 'production' 
+                   expression {
+                     return ACTION ==~  'destroy';
+                     }
             }
               
             steps {

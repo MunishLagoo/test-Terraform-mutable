@@ -21,7 +21,7 @@ pipeline {
             //     beforeInput true
             //       branch 'production' 
               expression {
-                  return ACTION =  'apply';
+                  return ACTION ==~  'apply';
               }
             }
               
@@ -35,7 +35,7 @@ pipeline {
         stage ('DB & ALB Create') {
             when {
                 expression {
-                  return ACTION =  'apply';
+                  return ACTION ==~  'apply';
               }
             } 
             parallel {
@@ -71,7 +71,7 @@ pipeline {
         stage ('DB & ALB Destroy') {
             when {
                 expression {
-                  return ACTION =  'destroy';
+                  return ACTION ==~  'destroy';
               }
             } 
             parallel {
@@ -99,7 +99,7 @@ pipeline {
             //     beforeInput true
             //       branch 'production' 
             expression {
-                  return ACTION =  'destroy';
+                  return ACTION ==~  'destroy';
               }
             }
               

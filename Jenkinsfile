@@ -32,7 +32,7 @@ pipeline {
                 '''
             }
         }
-        stage ('DB & ALB') {
+        stage ('DB & ALB Create') {
             when {
                 expression {
                   return ACTION =  'apply';
@@ -68,7 +68,7 @@ pipeline {
        }
 
             
-        stage ('DB & ALB') {
+        stage ('DB & ALB Destroy') {
             when {
                 expression {
                   return ACTION =  'destroy';

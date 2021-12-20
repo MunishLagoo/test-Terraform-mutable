@@ -17,9 +17,9 @@ pipeline {
     }
     stages {
         stage ('VPC') {
-            //  when {    
+              when {    
             // //     beforeInput true
-            //      branch 'production' }
+                  branch 'production' }
               
             steps {
                 sh '''
@@ -60,8 +60,8 @@ pipeline {
                     }
                 }
            // }
-        //}
-
+       // }
 
     }
+    
 }

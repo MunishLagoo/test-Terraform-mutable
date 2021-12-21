@@ -1,24 +1,3 @@
-
-//request spot instance
-//wait for fulfilment option because it is spot instance
-resource "aws_spot_instance_request" "mongodb" {
-  ami           = data.aws_ami.ami.id
-  instance_type = var.MONGODB_INSTANCE
-  vpc_security_group_ids = [aws_security_group.mongodb.id]
-  wait_for_fulfillment = true
-  subnet_id = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS_IDS[0]
-
-  tags = {
-    Name = "mongodb-${var.ENV}"
-  }
-}
-
-resource "aws_ec2_tag" "mongodb" {
-  resource_id = aws_spot_instance_request.mongodb.spot_instance_id
-  key         = "Name"
-  value       = "mongodb-${var.ENV}"
-}
-
 //create security group
 //it is ec2 instance needs SSH port open
 resource "aws_security_group" "mongodb" {
@@ -29,8 +8,8 @@ resource "aws_security_group" "mongodb" {
   ingress = [
     {
       description      = "MONGODB"
-      from_port        = 27016
-      to_port          = 27016
+      from_port        = 27017
+      to_port          = 27017
       protocol         = "tcp"
       cidr_blocks      = local.ALL_CIDR
       ipv6_cidr_blocks = []
@@ -68,6 +47,27 @@ resource "aws_security_group" "mongodb" {
   tags = {
     Name = "mongodb-${var.ENV}"
   }
+}
+
+
+//request spot instance
+//wait for fulfilment option because it is spot instance
+resource "aws_spot_instance_request" "mongodb" {
+  ami           = data.aws_ami.ami.id
+  instance_type = var.MONGODB_INSTANCE
+  vpc_security_group_ids = [aws_security_group.mongodb.id]
+  wait_for_fulfillment = true
+  subnet_id = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS_IDS[0]
+
+  tags = {
+    Name = "mongodb-${var.ENV}"
+  }
+}
+
+resource "aws_ec2_tag" "mongodb" {
+  resource_id = aws_spot_instance_request.mongodb.spot_instance_id
+  key         = "Name"
+  value       = "mongodb-${var.ENV}"
 }
 
 //create dns record

@@ -54,12 +54,12 @@ resource "aws_efs_mount_target" "efs-mt-shared" {
 
 resource "aws_efs_access_point" "efs-access-points" {
     file_system_id = aws_efs_file_system.efs-shared.id
-    posix_user = {
+    posix_user  {
         uid = 4000
         gid = 4000
     }
 
-    root_directory = {
+    root_directory  {
         path = "/apps/cart"
         creation_info = {
             owner_uid = 4000

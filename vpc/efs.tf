@@ -61,7 +61,7 @@ resource "aws_efs_access_point" "efs-access-points" {
 
     root_directory  {
         path = "/apps/cart"
-        creation_info = {
+        creation_info  {
             owner_uid = 4000
             owner_gid = 4000
             permissions = "0755"

@@ -53,19 +53,18 @@ resource "aws_efs_mount_target" "efs-mt-shared" {
 }
 
 resource "aws_efs_access_point" "efs-access-points" {
-    Name = cart
     file_system_id = aws_efs_file_system.efs-shared.id
-    PosixUser = {
-        Uid = 4000
-        Gid = 4000
+    posix_user = {
+        uid = 4000
+        gid = 4000
     }
 
-    RootDirectory = {
-        Path = "/apps/cart"
-        CreationInfo = {
-            OwnerUid = 4000
-            OwnerGid = 4000
-            Permissions = 0755
+    root_directory = {
+        path = "/apps/cart"
+        creation_info = {
+            owner_uid = 4000
+            owner_gid = 4000
+            permissions = "0755"
         }
     }
 }

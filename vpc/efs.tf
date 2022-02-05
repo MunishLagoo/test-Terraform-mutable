@@ -48,7 +48,7 @@ tags = {
 
 resource "aws_efs_mount_target" "efs-mt-shared" {
     file_system_id = aws_efs_file_system.efs-shared.id
-    subnet_id = aws_subnet.private-subnet.*.id
+    subnet_id = aws_subnet.private-subnet.*.id[0]
     security_groups = [aws_security_group.ingress-efs.id]
 }
 

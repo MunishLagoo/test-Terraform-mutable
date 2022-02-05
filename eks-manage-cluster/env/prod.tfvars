@@ -1,0 +1,10 @@
+ENV                    = "prod"
+VPC_CIDR_MAIN          = "10.100.0.0/16"
+VPC_CIDR_ADDON         = ["10.255.1.0/24"]
+# VPC_CIDR_ADDON        = ["10.1.0.0/16","10.2.0.0/16"]
+PRIVATE_SUBNETS        = ["10.100.0.0/17","10.100.128.0/17"]
+PUBLIC_SUBNETS         = ["10.255.1.0/25","10.255.1.128/25"]
+AZS                    = ["us-east-1c","us-east-1d"]
+VPC_CIDR_DEFAULT       = "172.31.0.0/16"
+VPC_ID_DEFAULT         = "vpc-23008059"
+INTERNAL_HOSTED_ZONEID = "Z03541381G64RYGJNKCN4"

@@ -6,6 +6,6 @@ variable "PRIVATE_SUBNETS" {}
 variable "AZS" {}
 variable "VPC_ID_DEFAULT" {}
 variable "VPC_CIDR_DEFAULT" {}
-variable INTERNAL_HOSTED_ZONEID {}
+variable "INTERNAL_HOSTED_ZONEID" {}
 variable EKS_CLUSTER {}
 variable EKS_REGION {}
